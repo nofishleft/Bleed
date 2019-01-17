@@ -206,12 +206,11 @@ public class BleedWindow : EditorWindow
                     array[i] = OUT.GetPixel(x + sWidth - 1, y + i);
                 for (int i = 0; i < bleed_amount; ++i)
                     OUT.SetPixels(x + i + sWidth,y,1,sHeight,array);
-                
-                
-                OUT.Apply();
+ 
             }
         }
         
+        OUT.Apply();
 
         byte[] bytes = OUT.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/" + path, bytes);
