@@ -8,7 +8,7 @@ let options = {
     bleed: 0
 };
 
-let i,o;
+let i = 'in.png',o = 'out.png';
 process.argv.forEach((val, index) => {
     if (index <= 0) return;
     const parts = val.split(':');
@@ -39,4 +39,4 @@ process.argv.forEach((val, index) => {
 });
 
 
-BleedAPI.ReadPNG("in.png", "out.png", options);
+BleedAPI.ReadPNG(i, o, options);
