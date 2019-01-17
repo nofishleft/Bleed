@@ -3,8 +3,8 @@ Create bleed edges on sprite sheets
 
 ## Platforms
 * [Unity](#Unity)
-* [Node.js](#Node.js)
-* [Standalone Electron](#Standalone%20Electron)
+* [Node.js](#nodejs)
+* [Standalone Electron](#standalone-electron)
 
 ### Unity
 Uses a Unity Editor Window.
