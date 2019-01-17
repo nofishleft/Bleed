@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+        const fs = require('fs');
+        const remote = require('electron').remote;
+        const {dialog} = remote;
+        const ElectronTitlebarWindows = require('electron-titlebar-windows');
+        const titlebar = new ElectronTitlebarWindows({
+            backgroundColor: '#018786',
+            color: '#FFFFFF',
+            draggable: true,
+            fullscreen: false
+        });
+
+        let inputPath = "in.png", outputPath = "out.png";
+
+        function DefinitionSwitchH() {
+            let e = document.getElementById("spriteDefinitionTypeBoxH");
+            let f = document.getElementById("spriteDefinitionTypeLabelH");
+            let gSize = document.getElementById("iHSize");
+            let gCount = document.getElementById("iHCount");
+            if (e.checked) {
+                f.innerText = "Using Horizontal Sprite Count";
+                gSize.hidden = true;
+                gCount.hidden = false;
+            } else {
+                f.innerText = "Using Horizontal Sprite Size"
+                gSize.hidden = false;
+                gCount.hidden = true;
+            }
+        }
+
+        function DefinitionSwitchV() {
+            let e = document.getElementById("spriteDefinitionTypeBoxV");
+            let f = document.getElementById("spriteDefinitionTypeLabelV");
+            let gSize = document.getElementById("iVSize");
+            let gCount = document.getElementById("iVCount");
+            if (e.checked) {
+                f.innerText = "Using Vertical Sprite Count";
+                gSize.hidden = true;
+                gCount.hidden = false;
+            } else {
+                f.innerText = "Using Vertical Sprite Size"
+                gSize.hidden = false;
+                gCount.hidden = true;
+            }
+        }
+
+        function selectInput(e) {
+            let filePaths = dialog.showOpenDialog({
+                filters: [{name: 'Images', extensions: ['png']}],
+                properties: ['openFile']
+            });
+            if (filePaths && filePaths.length > 0) {
+                inputPath = filePaths[0];
+                document.getElementById("inputPreview").src = inputPath;
+                document.getElementById("setIn").hidden = true;
+            }
+
+        }
+
+        function selectOutput(e) {
+            outputPath = dialog.showSaveDialog({filters: [{name: 'Images', extensions: ['png']}]});
+            if (outputPath) {
+                document.getElementById("setOut").hidden = true;
+                document.getElementById("outText").innerText = `Output: ${outputPath}`;
+            } else {
+                document.getElementById("setOut").hidden = false;
+                document.getElementById("outText").innerText = 'No Output';
+            }
+
+        }
+
+        function process(e) {
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>Bleed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <link href="css/menu.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #ffffff">
+<script type="text/javascript">
+    titlebar.appendTo();
+    var titleclass = document.getElementsByClassName('titlebar')[0];
+    if (titleclass) {
+        titleclass.className = titleclass.className + " fixed-top";
+    }
+</script>
+<div style="z-index: 4000; position: fixed; top:0; left: 0; width: auto; height: 38px; padding-left: 10px; padding-top: 3px; float: left; color: #FFFFFF;">
+    <span>Bleed - Electron</span></div>
+<div id="menu-bar" style="padding-top: 32px; position: relative; z-index: 2000 !important;">
+    <ul class="main-menu">
+
+        <li>
+            File
+            <ul>
+                <li class="icon save"><a onClick="selectInput(this)">Select Input<span>Ctrl+L</span></a></li>
+                <li class="icon save"><a onClick="selectOutput(this)">Select Output<span>Ctrl+S</span></a></li>
+                <li class="icon save"><a onClick="process(this)">Generate<span>Ctrl+R</span></a></li>
+            </ul>
+        </li>
+
+        <li>
+            Help
+            <ul>
+                <li>
+                    Documentation
+                    <ul>
+                        <li><a href="#">Rishaan.nz</a></li>
+                        <li><a href="#">Github</a></li>
+                    </ul>
+                </li>
+                <li class="separator"></li>
+                <li>
+                    Github
+                    <ul>
+                        <li><a href="https://github.com/nofishleft/Bleed">Bleed</a></li>
+                        <li class="separator"></li>
+                        <li><a href="#">Node</a></li>
+                        <li><a href="#">Unity</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="body">
+    <div class="container-fluid" id="sbar">
+        <div class="row contd">
+            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" id="item-1" onClick="selectInput(this)" href="#">Select Input<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="item-2" onClick="selectOutput(this)" href="#">Select Output<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="item-3" onClick="process(this)" href="#">Generate<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" id="item-4" onClick="" href="#">Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="item-5" onClick="" href="#">GitHub</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <main id="content" role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3 mkscr">
+                <h1>Bleed - Electron</h1>
+                <br/>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <br/>
+                            <h3>Sprite Definition</h3>
+                            <br/>
+                            <label class="switch">
+                                <input id="spriteDefinitionTypeBoxH" type="checkbox" onclick="DefinitionSwitchH()">
+                                <span class="slider round"></span>
+                            </label>
+                            <span id="spriteDefinitionTypeLabelH">Using Horizontal Sprite Size</span>
+                            <br/>
+                            <input id="iHSize" type="number" min="1">
+                            <input hidden="true" id="iHCount" type="number" min="1">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <label class="switch">
+                                <input id="spriteDefinitionTypeBoxV" type="checkbox" onclick="DefinitionSwitchV()">
+                                <span class="slider round"></span>
+                            </label>
+                            <span id="spriteDefinitionTypeLabelV">Using Vertical Sprite Size</span>
+                            <br/>
+                            <input id="iVSize" type="number" min="1">
+                            <input hidden="true" id="iVCount" type="number" min="1">
+                            <br/>
+                            <br/>
+                            <span>Bleed</span>
+                            <input id="bleed" type="number" min="0">
+                        </td>
+                        <td width="50%" id="right">
+                            <h4>Input</h4>
+                            <img class="img-fluid" id="inputPreview" src="" alt="No Input Set" width="200" height="200"
+                                 style="padding-bottom: 10px; image-rendering: pixelated !important;"/>
+                            <button id="setIn" onclick="selectInput()">Set Input</button>
+                            <hr />
+                            <h4>Output</h4>
+                            <div id="outText" class="text-muted">No Output Set</div>
+                            <button id="setOut" onclick="selectOutput()">Set Output</button>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </main>
+        </div>
+    </div>
+</div>
+<script src="./renderer.js"></script>
+<script src="js/jquery.menu.js"></script>
+</body>
+</html>
