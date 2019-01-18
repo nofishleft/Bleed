@@ -16,6 +16,11 @@ On the menu bar, click Tools > Bleed
 
 Built and tested on 2018.3.0f2.
 
+#### Installation
+Download .unitypackage [here](https://github.com/nofishleft/Bleed/releases)
+
+Open with unity.
+
 ## Node.js
 [npm](https://www.npmjs.com/package/bleed-node)
 
@@ -28,7 +33,7 @@ See the [CLI](#packaged-cli) for an example on how to use bleed-node
 Uses a command line interface. [Source](https://github.com/nofishleft/Bleed/tree/master/Node)
 
 #### Installation
-Download packaged file here
+Download packaged file [here](https://github.com/nofishleft/Bleed/releases), look for `bleed-cli-vX.X.X-platform-arch.`
 
 #### Parameters
 Parameter | Description
@@ -56,3 +61,5 @@ Packaged Node.js version using an Electron interface.
 ![Image Couldn't Load](https://i.imgur.com/3T0uuzW.png)
 
 ![Image Couldn't Load](https://i.imgur.com/4wYaDME.png)
+
+Download standalone [here](https://github.com/nofishleft/Bleed/releases), look for `bleed-electron-vX.X.X-platform-arch`.
