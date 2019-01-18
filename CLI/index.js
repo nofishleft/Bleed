@@ -33,6 +33,7 @@ process.argv.forEach((val, index) => {
             break;
         case 'b':
             options.bleed = parseInt(parts[1]) || 0;
+            break;
         default:
             break;
     }
