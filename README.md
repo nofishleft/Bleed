@@ -30,7 +30,7 @@ Open with unity.
 See the [CLI](#packaged-cli) for an example on how to use bleed-node
 
 ## Packaged CLI
-Uses a command line interface. [Source](https://github.com/nofishleft/Bleed/tree/master/Node)
+Uses a command line interface. [Source](https://github.com/nofishleft/Bleed/blob/master/CLI/index.js)
 
 #### Installation
 Download packaged file [here](https://github.com/nofishleft/Bleed/releases), look for `bleed-cli-vX.X.X-platform-arch.`
