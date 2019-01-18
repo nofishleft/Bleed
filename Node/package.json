@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "growl": "^1.10.5",
     "pngjs": "^3.3.3"
   }
 }
