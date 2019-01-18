@@ -25,8 +25,8 @@ function ReadPNG(i_in, i_out, options) {
             let height = this.height;
 
             //Dimensions of each sprite
-            let sWidth = options.sWidth || width / sXNum;
-            let sHeight = options.sHeight || width / sYNum;
+            let sWidth = options.sWidth || width / options.sXNum;
+            let sHeight = options.sHeight || width / options.sYNum;
 
             //Number of sprites in each dimension
             let sXNum = options.sXNum || width / sWidth;

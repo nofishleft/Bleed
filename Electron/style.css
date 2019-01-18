@@ -201,3 +201,15 @@ td#right {
     padding-left: 10px;
     border-left: 1px solid #03DAC6;
 }
+
+button {
+    border: 1px solid #03DAC6;
+    background-color: #FFFFFF;
+    color: #03DAC6;
+}
+
+button:hover {
+    border: 1px solid #018786;
+    background-color: #FFFFFF;
+    color: #018786;
+}

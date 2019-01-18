@@ -1,8 +1,8 @@
 {
-  "name": "Node",
-  "version": "1.0.0",
+  "name": "bleed-node",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "BleedAPI.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

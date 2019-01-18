@@ -6,6 +6,7 @@
         const fs = require('fs');
         const remote = require('electron').remote;
         const {dialog} = remote;
+        const bleed = require('bleed-node');
         const ElectronTitlebarWindows = require('electron-titlebar-windows');
         const titlebar = new ElectronTitlebarWindows({
             backgroundColor: '#018786',
@@ -56,7 +57,9 @@
             if (filePaths && filePaths.length > 0) {
                 inputPath = filePaths[0];
                 document.getElementById("inputPreview").src = inputPath;
+                document.getElementById("inputPreview").hidden = false;
                 document.getElementById("setIn").hidden = true;
+                document.getElementById("inText").hidden = true;
             }
 
         }
@@ -74,6 +77,23 @@
         }
 
         function process(e) {
+            let options = {};
+
+            if (document.getElementById("spriteDefinitionTypeBoxV").checked) {
+                options.sYNum = parseInt(document.getElementById("iVCount").value);
+            } else {
+                options.sHeight = parseInt(document.getElementById("iVSize").value);
+            }
+
+            if (document.getElementById("spriteDefinitionTypeBoxH").checked) {
+                options.sXNum = parseInt(document.getElementById("iHCount").value);
+            } else {
+                options.sWidth = parseInt(document.getElementById("iHSize").value);
+            }
+
+            options.bleed = parseInt(document.getElementById("bleed").value) || bleed;
+
+            bleed.ReadPNG(inputPath, outputPath, options);
         }
     </script>
     <meta charset="UTF-8">
@@ -194,18 +214,19 @@
                         </td>
                         <td width="50%" id="right">
                             <h4>Input</h4>
-                            <img class="img-fluid" id="inputPreview" src="" alt="No Input Set" width="200" height="200"
+                            <img class="img-fluid" id="inputPreview" hidden="true" src="" alt="No Input Set" width="200" height="200"
                                  style="padding-bottom: 10px; image-rendering: pixelated !important;"/>
-                            <button id="setIn" onclick="selectInput()">Set Input</button>
+                            <div id="inText" class="text-muted">No Input Set</div>
+                            <button id="setIn" onclick="selectInput(this)">Set Input</button>
                             <hr />
                             <h4>Output</h4>
                             <div id="outText" class="text-muted">No Output Set</div>
-                            <button id="setOut" onclick="selectOutput()">Set Output</button>
+                            <button id="setOut" onclick="selectOutput(this)">Set Output</button>
                         </td>
                     </tr>
                 </table>
-
-
+                <br />
+                <button id="process" onclick="process(this)">Generate</button>
             </main>
         </div>
     </div>
