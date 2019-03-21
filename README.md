@@ -27,7 +27,7 @@ Open with unity.
 #### Installation
 `npm i bleed-node`
 
-See the [CLI](#packaged-cli) for an example on how to use bleed-node
+See the [Packaged CLI Source](https://github.com/nofishleft/Bleed/blob/master/CLI/index.js) for an example on how to use bleed-node
 
 ## Packaged CLI
 Uses a command line interface. [Source](https://github.com/nofishleft/Bleed/blob/master/CLI/index.js)
