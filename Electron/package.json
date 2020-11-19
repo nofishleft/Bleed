@@ -13,7 +13,7 @@
     "bleed-node": "^1.0.1",
     "bootstrap": "^4.2.1",
     "electron-titlebar-windows": "^3.0.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "pngjs": "^3.3.3",
     "popper.js": "^1.14.6",
     "tether": "^1.4.5"
